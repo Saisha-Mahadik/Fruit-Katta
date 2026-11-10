@@ -26,7 +26,7 @@
   "description": "A Hanuman themed café, a space inspired by unwavering bhakti. Good fruits, great flavours and refreshing moments.",
   "url": "https://YOUR-DOMAIN.com/",
   "image": "https://YOUR-DOMAIN.com/assets/images/hero.jpg",
-  "telephone": "+917977067119",
+  "telephone": "+919769204427",
   "address": {"@type": "PostalAddress", "streetAddress": "Shop No.8, Rajanigandha Apartment, near Nalanda College, Gorai 2", "addressLocality": "Borivali West, Mumbai", "addressRegion": "Maharashtra", "postalCode": "400091", "addressCountry": "IN"},
   "sameAs": ["https://www.instagram.com/fruitkatta"]
 }
@@ -152,12 +152,12 @@
         <h2>Sip Karo, Chill Karo!</h2>
         <ul class="info">
           <li><i class="bi bi-geo-alt-fill" aria-hidden="true"></i><span>Shop No.8, Rajanigandha Apartment, near Nalanda College, Gorai 2, Borivali West, Mumbai, Maharashtra 400091</span></li>
-          <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+917977067119">079770 67119</a></li>
+          <li><i class="bi bi-telephone-fill" aria-hidden="true"></i><a href="tel:+919769204427" data-phone>097692 04427</a></li>
           <li><i class="bi bi-clock-fill" aria-hidden="true"></i><span data-field="hours">9 AM – 11:30 PM</span></li>
         </ul>
         <div class="d-flex flex-wrap gap-3">
           <a class="btn btn-fk" data-maps target="_blank" rel="noopener" href="#"><i class="bi bi-map" aria-hidden="true"></i> Get Directions</a>
-          <a class="btn btn-fk-dark" href="tel:+917977067119"><i class="bi bi-telephone" aria-hidden="true"></i> Call Us</a>
+          <a class="btn btn-fk-dark" href="tel:+919769204427" data-phone><i class="bi bi-telephone" aria-hidden="true"></i> Call Us</a>
           <a class="btn btn-fk-dark" data-instagram target="_blank" rel="noopener" href="#"><i class="bi bi-instagram" aria-hidden="true"></i> Instagram</a>
         </div>
       </div>
@@ -172,7 +172,7 @@
     <div class="row g-4">
       <div class="col-lg-4"><a class="fk-brand" href="#home">FRUIT<span>कट्टा</span></a><p class="hand mt-2">Sip Karo, Chill Karo!</p></div>
       <div class="col-6 col-lg-4"><h3>Explore</h3><ul class="list-unstyled"><li><a href="#about">About</a></li><li><a href="#menu">Menu</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul></div>
-      <div class="col-6 col-lg-4"><h3>Find us</h3><p><a href="tel:+917977067119">079770 67119</a></p><p>Gorai 2, Borivali West, Mumbai 400091</p><a class="social" data-instagram target="_blank" rel="noopener" href="#" aria-label="Fruit Katta on Instagram"><i class="bi bi-instagram"></i></a></div>
+      <div class="col-6 col-lg-4"><h3>Find us</h3><p><a href="tel:+919769204427" data-phone>097692 04427</a></p><p>Gorai 2, Borivali West, Mumbai 400091</p><a class="social" data-instagram target="_blank" rel="noopener" href="#" aria-label="Fruit Katta on Instagram"><i class="bi bi-instagram"></i></a></div>
     </div>
     <p class="copy">&copy; <span id="year"></span> Fruit Katta. All rights reserved.</p>
   </div>
@@ -182,23 +182,60 @@
   <div class="offcanvas-header"><h2 class="offcanvas-title" id="cartTitle">Your Order</h2><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
   <div class="offcanvas-body d-flex flex-column">
     <div id="cartItems" class="flex-grow-1"></div>
-    <div class="cart-foot"><div class="total-row"><span>Total</span><b id="cartTotal">₹0</b></div><button id="checkoutBtn" class="btn btn-fk w-100" disabled>Checkout</button></div>
+    <div class="cart-foot"><div class="total-row"><span>Total</span><b id="cartTotal">₹0</b></div><button id="checkoutBtn" class="btn btn-fk w-100" disabled>Checkout</button>
+    <div class="d-flex justify-content-between mt-2"><button id="clearCart" type="button" class="btn btn-link btn-sm p-0 d-none">Clear cart</button><button id="lastOrderBtn" type="button" class="btn btn-link btn-sm p-0 d-none">View last order summary</button></div></div>
   </div>
 </div>
 
 <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="checkoutTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
-    <div class="modal-header"><h2 class="modal-title" id="checkoutTitle">Review your order</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+    <div class="modal-header"><h2 class="modal-title" id="checkoutTitle">Your order summary</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
     <div class="modal-body">
       <ul id="summary" class="summary"></ul>
       <div class="total-row"><span>Total</span><b id="summaryTotal"></b></div>
-      <label class="form-label mt-3" for="custName">Your name (optional)</label>
-      <input id="custName" class="form-control" autocomplete="name">
-      <div id="waWarn" class="alert alert-warning mt-3" hidden>WhatsApp ordering isn't set up yet because the café's WhatsApp number hasn't been configured. Please call 079770 67119 to order.</div>
-      <p class="small mt-3 mb-0">Confirming opens WhatsApp with your order typed out. Your order is only sent once you press Send in WhatsApp.</p>
-      <p id="waDone" class="alert alert-success mt-3 mb-0" hidden>Your order is ready to send on WhatsApp. Please press Send there. The café will confirm it with you.</p>
+      <label class="form-label" for="custName">Your name (optional)</label>
+      <input id="custName" class="form-control mb-3" autocomplete="name">
+      <label class="form-label" for="orderNotes">Order notes (optional)</label>
+      <textarea id="orderNotes" class="form-control" rows="2" placeholder="E.g. less sugar, pick-up time"></textarea>
+      <p class="small mt-3 mb-0"><i class="bi bi-telephone" aria-hidden="true"></i> We take orders by phone. Tap the button below, then read out your order to our café team. Your order isn't confirmed until they confirm it with you.</p>
+      <p id="callStatus" class="alert alert-success mt-3 mb-0 d-none" role="status"></p>
+      <p id="noPhone" class="alert alert-warning mt-3 mb-0 d-none" role="alert">The café's phone number hasn't been configured yet, so calling isn't available right now.</p>
     </div>
-    <div class="modal-footer"><button class="btn btn-fk-dark" data-bs-dismiss="modal">Cancel</button><button id="confirmBtn" class="btn btn-fk">Confirm &amp; open WhatsApp</button></div>
+    <div class="modal-footer call-footer">
+      <a id="callBtn" class="btn btn-fk btn-call" href="#"><i class="bi bi-telephone-fill" aria-hidden="true"></i> Call Fruit Katta to Order</a>
+      <p class="num">No dialler on this device? Call <a href="tel:+919769204427" data-phone>097692 04427</a> from your phone.</p>
+      <div class="alt-row">
+        <button id="copyBtn" type="button" class="btn btn-fk-dark"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy Order Details</button>
+        <a id="smsBtn" class="btn btn-fk-dark d-none" href="#"><i class="bi bi-chat-dots" aria-hidden="true"></i> SMS Order</a>
+        <a class="btn btn-fk-dark" data-maps target="_blank" rel="noopener" href="#"><i class="bi bi-map" aria-hidden="true"></i> Get Directions</a>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="thanks" tabindex="-1" aria-labelledby="thanksTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content text-center p-3">
+    <div class="modal-body">
+      <div class="thanks-icon" aria-hidden="true"><i class="bi bi-heart-fill"></i></div>
+      <h2 class="modal-title mb-2" id="thanksTitle">Thanks for choosing Fruit Katta!</h2>
+      <p>We hope you enjoyed your experience. Please make sure your order has been confirmed directly with our café team.</p>
+      <div class="d-grid gap-2 mt-4"><button id="viewOrderBtn" type="button" class="btn btn-fk">View My Order</button><button type="button" class="btn btn-fk-dark" data-bs-dismiss="modal">Continue Browsing</button></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="lastOrder" tabindex="-1" aria-labelledby="lastTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+    <div class="modal-header"><h2 class="modal-title" id="lastTitle">Your last order summary</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+    <div class="modal-body">
+      <ul id="lastSummary" class="summary"></ul>
+      <div class="total-row"><span>Total</span><b id="lastTotal"></b></div>
+      <p id="lastExtra" class="small"></p>
+      <p id="lastMeta" class="alert alert-info mb-0"></p>
+    </div>
+    <div class="modal-footer call-footer">
+      <div class="alt-row"><button id="lastCopy" type="button" class="btn btn-fk-dark"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy Order Details</button><a class="btn btn-fk" href="tel:+919769204427" data-phone><i class="bi bi-telephone-fill" aria-hidden="true"></i> Call Again</a></div>
+    </div>
   </div></div>
 </div>
 
